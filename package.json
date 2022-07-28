@@ -1,0 +1,9 @@
+{
+  "name": "@bv/sdk-js",
+  "version": "0.0.0",
+  "description": "Base Verify javascript sdk",
+  "main": "index.ts",
+  "repository": "https://github.com/jksjaz/bv-sdk-js.git",
+  "license": "MIT",
+  "private": true
+}
