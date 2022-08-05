@@ -1,21 +1,21 @@
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
+import { AxiosClient } from '../../axios/axios.service';
 import { CreateManyPhones, CreatePhone, VerifyPhone } from '../../interfaces/phone.interface';
 const API_URL: string = 'http://localhost:3000/v1';
 
 
 export class Phone {
     constructor(
-        private token: string,
-    ) { }
+        private axiosClient: AxiosClient,
+    ) {
+        // this.axiosClient = axiosClient;
+    }
+
+
 
     async create(createPhone: CreatePhone): Promise<any> {
         try {
-            const response = await axios.post(`${API_URL}/phone`, createPhone, {
-                headers: {
-                    "Content-Type": "application/json",
-                    'ApiKey': this.token,
-                },
-            });
+            const response = await this.axiosClient.post(`${API_URL}/phone`, createPhone);
             return response.data;
         } catch (error) {
             throw new Error(`${error}`);
@@ -24,12 +24,7 @@ export class Phone {
 
     async createMany(createManyPhones: CreateManyPhones): Promise<any> {
         try {
-            const response = await axios.post(`${API_URL}/phone/create-many`, createManyPhones, {
-                headers: {
-                    "Content-Type": "application/json",
-                    'ApiKey': this.token,
-                },
-            });
+            const response = await this.axiosClient.post(`${API_URL}/phone/create-many`, createManyPhones);
             return response.data;
         } catch (error) {
             throw new Error(`${error}`);
@@ -38,12 +33,7 @@ export class Phone {
 
     async list(): Promise<any> {
         try {
-            const response = await axios.get(`${API_URL}/phone`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    'ApiKey': this.token,
-                },
-            });
+            const response = await this.axiosClient.get(`${API_URL}/phone`);
             return response.data;
         } catch (error) {
             throw new Error(`${error}`);
@@ -52,12 +42,7 @@ export class Phone {
 
     async get(id: string): Promise<any> {
         try {
-            const response = await axios.get(`${API_URL}/phone/${id}`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    'ApiKey': this.token,
-                },
-            });
+            const response = await this.axiosClient.get(`${API_URL}/phone/${id}`);
             return response.data;
         } catch (error) {
             throw new Error(`${error}`);
@@ -66,12 +51,7 @@ export class Phone {
 
     async verify(verifyPhone: VerifyPhone): Promise<any> {
         try {
-            const response = await axios.patch(`${API_URL}/phone/verify`, verifyPhone, {
-                headers: {
-                    "Content-Type": "application/json",
-                    'ApiKey': this.token,
-                },
-            });
+            const response = await this.axiosClient.patch(`${API_URL}/phone/verify`, verifyPhone);
             return response.data;
         } catch (error) {
             throw new Error(`${error}`);
@@ -80,12 +60,7 @@ export class Phone {
 
     async delete(id: string): Promise<any> {
         try {
-            const response = await axios.delete(`${API_URL}/phone/${id}`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    'ApiKey': this.token,
-                },
-            });
+            const response = await this.axiosClient.delete(`${API_URL}/phone/${id}`);
         } catch (error) {
             throw new Error(`${error}`);
         }
