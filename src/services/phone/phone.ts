@@ -8,7 +8,6 @@ export class Phone {
     constructor(
         private axiosClient: AxiosClient,
     ) {
-        // this.axiosClient = axiosClient;
     }
 
 
