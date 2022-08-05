@@ -1,11 +1,17 @@
-import { Axios } from "axios";
+import { Axios, AxiosRequestConfig } from "axios";
 
 export class AxiosClient extends Axios {
     constructor(
-        private token: string, //gonna be apikey for service
+        private token: string,
     ) {
-        super();
-        this.defaults.baseURL = 'http://localhost:3000/v1';
+        super(
+            {
+                baseURL: "http://localhost:3000/v1",
+                headers: {
+                    "Content-Type": "application/json",
+                    "apikey": token
+                }
+            }
+        );
     }
 }
-//TODO: gonna replace the classes with this
