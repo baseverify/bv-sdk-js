@@ -1,5 +1,6 @@
 import { AxiosClient } from '../../axios/axios.service';
-import { CreateEmail, CreateManyPhones, VerifyPhone } from '../../interfaces/phone.interface';
+import { CreateEmail, CreateManyEmails, CreateManyPhones, VerifyEmail, VerifyPhone } from '../../interfaces/create.interface';
+import { CreateManyEmailsData, Email } from '../../interfaces/response.interface';
 const API_URL: string = 'http://localhost:3000/v1';
 
 
@@ -17,16 +18,16 @@ export class Phone {
         }
     }
 
-    async createMany(createManyPhones: CreateManyPhones): Promise<any> {
+    async createMany(createManyEmails: CreateManyEmails): Promise<CreateManyEmailsData> {
         try {
-            const response = await this.axiosClient.post(`${API_URL}/email/create-many`, createManyPhones);
+            const response = await this.axiosClient.post(`${API_URL}/email/create-many`, createManyEmails);
             return response.data;
         } catch (error) {
             throw new Error(`${error}`);
         }
     }
 
-    async list(): Promise<any> {
+    async list(): Promise<Email[]> {
         try {
             const response = await this.axiosClient.get(`${API_URL}/email`);
             return response.data;
@@ -35,7 +36,7 @@ export class Phone {
         }
     }
 
-    async get(id: string): Promise<any> {
+    async get(id: string): Promise<Email> {
         try {
             const response = await this.axiosClient.get(`${API_URL}/email/${id}`);
             return response.data;
@@ -44,9 +45,9 @@ export class Phone {
         }
     }
 
-    async verify(verifyPhone: VerifyPhone): Promise<any> {
+    async verify(verifyEmail: VerifyEmail): Promise<any> {
         try {
-            const response = await this.axiosClient.patch(`${API_URL}/email/verify`, verifyPhone);
+            const response = await this.axiosClient.patch(`${API_URL}/email/verify`, verifyEmail);
             return response.data;
         } catch (error) {
             throw new Error(`${error}`);
@@ -54,7 +55,7 @@ export class Phone {
     }
 
     //TODO: define Delete Interface
-    async delete(id: string): Promise<any> {
+    async delete(id: string): Promise<string> {
         try {
             const response = await this.axiosClient.delete(`${API_URL}/email/${id}`);
             return response.data;
