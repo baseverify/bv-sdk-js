@@ -1,6 +1,6 @@
 import { AxiosClient } from '../../axios/axios.service';
 import { CreateManyPhones, CreatePhone, VerifyPhone } from '../../interfaces/create.interface';
-import { GetAllPhone } from '../../interfaces/response.interface';
+import { GetAllPhone, GetPhone } from '../../interfaces/response.interface';
 const API_URL: string = 'http://localhost:3000/v1';
 
 
