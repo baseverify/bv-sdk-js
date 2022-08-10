@@ -193,7 +193,7 @@ export interface CreateDomainRootObject {
     data: string;
 }
 
-export interface Domain {
+export interface DomainType {
     id: string;
     requesterId: string;
     requester: Requester;
@@ -210,7 +210,7 @@ export interface GetManyDomainRootObject {
     status: boolean;
     statusCode: number;
     message: string;
-    data: Domain[];
+    data: DomainType[];
 }
 
 
@@ -218,7 +218,7 @@ export interface GetDomainRootObject {
     status: boolean;
     statusCode: number;
     message: string;
-    data: Domain;
+    data: DomainType;
 }
 
 export interface DeleteDomainRootObject {
