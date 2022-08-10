@@ -1,5 +1,6 @@
 import { AxiosClient } from "../../axios/axios.service";
-import { CreateAddress, VerifyAddress } from "../../interfaces/phone.interface";
+import { CreateAddress, VerifyAddress } from "../../interfaces/create.interface";
+import { AddressData, AddressType } from "../../interfaces/response.interface";
 
 const API_URL: string = "http://localhost:3000/v1";
 
@@ -8,7 +9,7 @@ export class Address {
         private axiosClient: AxiosClient,
     ) { }
 
-    async create(createAddress: CreateAddress): Promise<any> {
+    async create(createAddress: CreateAddress): Promise<AddressData> {
         try {
             const response = await this.axiosClient.post(`${API_URL}/address`, createAddress);
             return response.data;
@@ -17,7 +18,7 @@ export class Address {
         }
     }
 
-    async list(): Promise<any> {
+    async list(): Promise<AddressType[]> {
         try {
             const response = await this.axiosClient.get(`${API_URL}/address`);
             return response.data;
@@ -26,7 +27,7 @@ export class Address {
         }
     }
 
-    async get(id: string): Promise<any> {
+    async get(id: string): Promise<AddressType> {
         try {
             const response = await this.axiosClient.get(`${API_URL}/address/${id}`);
             return response.data;
@@ -35,7 +36,7 @@ export class Address {
         }
     }
 
-    async verify(verifyAddress: VerifyAddress): Promise<any> {
+    async verify(verifyAddress: VerifyAddress): Promise<AddressType> {
         try {
             const response = await this.axiosClient.patch(`${API_URL}/address/verify`, verifyAddress);
             return response.data;

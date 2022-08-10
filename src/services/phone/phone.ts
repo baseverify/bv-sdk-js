@@ -1,5 +1,6 @@
 import { AxiosClient } from '../../axios/axios.service';
-import { CreateManyPhones, CreatePhone, VerifyPhone } from '../../interfaces/phone.interface';
+import { CreateManyPhones, CreatePhone, VerifyPhone } from '../../interfaces/create.interface';
+import { GetAllPhone } from '../../interfaces/response.interface';
 const API_URL: string = 'http://localhost:3000/v1';
 
 
@@ -28,7 +29,7 @@ export class Phone {
         }
     }
 
-    async list(): Promise<any> {
+    async list(): Promise<GetAllPhone> {
         try {
             const response = await this.axiosClient.get(`${API_URL}/phone`);
             return response.data;
@@ -37,7 +38,7 @@ export class Phone {
         }
     }
 
-    async get(id: string): Promise<any> {
+    async get(id: string): Promise<GetPhone> {
         try {
             const response = await this.axiosClient.get(`${API_URL}/phone/${id}`);
             return response.data;

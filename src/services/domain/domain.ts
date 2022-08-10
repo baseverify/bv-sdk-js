@@ -1,5 +1,6 @@
 import { AxiosClient } from "../../axios/axios.service";
-import { CreateDomain, createManyDomain } from "../../interfaces/phone.interface";
+import { CreateDomain, createManyDomain } from "../../interfaces/create.interface";
+import { DomainCreateMany, DomainType } from "../../interfaces/response.interface";
 
 const API_URL: string = "http://localhost:3000/v1";
 
@@ -8,7 +9,7 @@ export class Domain {
         private axiosClient: AxiosClient,
     ) { }
 
-    async create(createDomain: CreateDomain): Promise<any> {
+    async create(createDomain: CreateDomain): Promise<String> {
         try {
             const response = await this.axiosClient.post(`${API_URL}/domain`, createDomain);
             return response.data;
@@ -17,7 +18,7 @@ export class Domain {
         }
     }
 
-    async createMany(createManyDomains: createManyDomain): Promise<any> {
+    async createMany(createManyDomains: createManyDomain): Promise<DomainCreateMany[]> {
         try {
             const response = await this.axiosClient.post(`${API_URL}/domain/create-many`, createManyDomains);
             return response.data;
@@ -26,7 +27,7 @@ export class Domain {
         }
     }
 
-    async list(): Promise<any> {
+    async list(): Promise<DomainType[]> {
         try {
             const response = await this.axiosClient.get(`${API_URL}/domain`);
             return response.data;
@@ -35,7 +36,7 @@ export class Domain {
         }
     }
 
-    async get(id: string): Promise<any> {
+    async get(id: string): Promise<DomainType> {
         try {
             const response = await this.axiosClient.get(`${API_URL}/domain/${id}`);
             return response.data;
@@ -44,7 +45,7 @@ export class Domain {
         }
     }
 
-    async delete(id: string): Promise<any> {
+    async delete(id: string): Promise<String> {
         try {
             const response = await this.axiosClient.delete(`${API_URL}/domain/${id}`);
             return response.data;
