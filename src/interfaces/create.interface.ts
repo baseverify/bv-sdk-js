@@ -1,58 +1,59 @@
 export enum VERIFCATION_TYPE {
-    OTP = 'OTP',
+  OTP = 'OTP',
+  TOKEN = 'TOKEN',
 }
 
 export interface CreatePhone {
-    phone: string;
-    verificationType: VERIFCATION_TYPE;
-    redirectUri: string;
+  phone: string;
+  verificationType: VERIFCATION_TYPE;
+  redirectUri: string;
 }
 
 export interface CreateManyPhones {
-    phones: CreatePhone[];
+  phones: CreatePhone[];
 }
 
 export interface VerifyPhone {
-    number: string,
-    otp: string,
+  number: string;
+  otp: string;
 }
 
 export interface CreateAddress {
-    customerName: string;
-    address: string;
-    address2: string;
-    city: string;
-    state: string;
-    country: string;
+  customerName: string;
+  address: string;
+  address2: string;
+  city: string;
+  state: string;
+  country: string;
 }
 
 export interface VerifyAddress {
-    identifier: string;
+  identifier: string;
 }
 
 export interface CreateDomain {
-    domain: string;
-    email: string;
+  domain: string;
+  email: string;
 }
 
 export interface createManyDomain {
-    domain: CreateDomain[]
+  domain: CreateDomain[];
 }
 
 export interface CreateEmail {
-    email: string,
-    redirectUri: string,
+  email: string;
+  redirectUri: string;
 }
 
 export interface CreateManyEmails {
-    emails: CreateEmail[];
+  emails: CreateEmail[];
 }
 
 export interface DeleteEmail {
-    email: string;
+  email: string;
 }
 
 export interface VerifyEmail {
-    hash: string;
-    email: string;
+  hash: string;
+  email: string;
 }

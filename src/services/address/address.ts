@@ -1,48 +1,43 @@
-import { AxiosClient } from "../../axios/axios.service";
-import { CreateAddress, VerifyAddress } from "../../interfaces/create.interface";
-import { AddressData, AddressType } from "../../interfaces/response.interface";
-
-const API_URL: string = "http://localhost:3000/v1";
+import { AxiosClient } from '../../axios/axios.service';
+import { CreateAddress, VerifyAddress } from '../../interfaces/create.interface';
+import { AddressData, AddressType } from '../../interfaces/response.interface';
 
 export class Address {
-    constructor(
-        private axiosClient: AxiosClient,
-    ) { }
+  constructor(private axiosClient: AxiosClient) {}
 
-    async create(createAddress: CreateAddress): Promise<AddressData> {
-        try {
-            const response = await this.axiosClient.post(`${API_URL}/address`, createAddress);
-            return response.data;
-        } catch (error) {
-            throw new Error(`${error}`);
-        }
+  async create(createAddress: CreateAddress): Promise<AddressData> {
+    try {
+      const response = await this.axiosClient.post('/address', createAddress);
+      return response.data;
+    } catch (error) {
+      throw new Error(`${error}`);
     }
+  }
 
-    async list(): Promise<AddressType[]> {
-        try {
-            const response = await this.axiosClient.get(`${API_URL}/address`);
-            return response.data;
-        } catch (error) {
-            throw new Error(`${error}`);
-        }
+  async list(): Promise<AddressType[]> {
+    try {
+      const response = await this.axiosClient.get('/address');
+      return response.data;
+    } catch (error) {
+      throw new Error(`${error}`);
     }
+  }
 
-    async get(id: string): Promise<AddressType> {
-        try {
-            const response = await this.axiosClient.get(`${API_URL}/address/${id}`);
-            return response.data;
-        } catch (error) {
-            throw new Error(`${error}`);
-        }
+  async get(id: string): Promise<AddressType> {
+    try {
+      const response = await this.axiosClient.get(`/address/${id}`);
+      return response.data;
+    } catch (error) {
+      throw new Error(`${error}`);
     }
+  }
 
-    async verify(verifyAddress: VerifyAddress): Promise<AddressType> {
-        try {
-            const response = await this.axiosClient.patch(`${API_URL}/address/verify`, verifyAddress);
-            return response.data;
-        } catch (error) {
-            throw new Error(`${error}`);
-        }
+  async verify(verifyAddress: VerifyAddress): Promise<AddressType> {
+    try {
+      const response = await this.axiosClient.patch('/address/verify', verifyAddress);
+      return response.data;
+    } catch (error) {
+      throw new Error(String(error));
     }
-
+  }
 }

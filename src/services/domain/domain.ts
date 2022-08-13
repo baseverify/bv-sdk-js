@@ -1,57 +1,52 @@
-import { AxiosClient } from "../../axios/axios.service";
-import { CreateDomain, createManyDomain } from "../../interfaces/create.interface";
-import { DomainCreateMany, DomainType } from "../../interfaces/response.interface";
-
-const API_URL: string = "http://localhost:3000/v1";
+import { AxiosClient } from '../../axios/axios.service';
+import { CreateDomain, createManyDomain } from '../../interfaces/create.interface';
+import { DomainCreateMany, DomainType } from '../../interfaces/response.interface';
 
 export class Domain {
-    constructor(
-        private axiosClient: AxiosClient,
-    ) { }
+  constructor(private axiosClient: AxiosClient) {}
 
-    async create(createDomain: CreateDomain): Promise<String> {
-        try {
-            const response = await this.axiosClient.post(`${API_URL}/domain`, createDomain);
-            return response.data;
-        } catch (error) {
-            throw new Error(`${error}`);
-        }
+  async create(createDomain: CreateDomain): Promise<String> {
+    try {
+      const response = await this.axiosClient.post('/domain', createDomain);
+      return response.data;
+    } catch (error) {
+      throw new Error(`${error}`);
     }
+  }
 
-    async createMany(createManyDomains: createManyDomain): Promise<DomainCreateMany[]> {
-        try {
-            const response = await this.axiosClient.post(`${API_URL}/domain/create-many`, createManyDomains);
-            return response.data;
-        } catch (error) {
-            throw new Error(`${error}`);
-        }
+  async createMany(createManyDomains: createManyDomain): Promise<DomainCreateMany[]> {
+    try {
+      const response = await this.axiosClient.post('/domain/create-many', createManyDomains);
+      return response.data;
+    } catch (error) {
+      throw new Error(`${error}`);
     }
+  }
 
-    async list(): Promise<DomainType[]> {
-        try {
-            const response = await this.axiosClient.get(`${API_URL}/domain`);
-            return response.data;
-        } catch (error) {
-            throw new Error(`${error}`);
-        }
+  async list(): Promise<DomainType[]> {
+    try {
+      const response = await this.axiosClient.get('/domain');
+      return response.data;
+    } catch (error) {
+      throw new Error(`${error}`);
     }
+  }
 
-    async get(id: string): Promise<DomainType> {
-        try {
-            const response = await this.axiosClient.get(`${API_URL}/domain/${id}`);
-            return response.data;
-        } catch (error) {
-            throw new Error(`${error}`);
-        }
+  async get(id: string): Promise<DomainType> {
+    try {
+      const response = await this.axiosClient.get(`/domain/${id}`);
+      return response.data;
+    } catch (error) {
+      throw new Error(`${error}`);
     }
+  }
 
-    async delete(id: string): Promise<String> {
-        try {
-            const response = await this.axiosClient.delete(`${API_URL}/domain/${id}`);
-            return response.data;
-        } catch (error) {
-            throw new Error(`${error}`);
-        }
+  async delete(id: string): Promise<String> {
+    try {
+      const response = await this.axiosClient.delete(`/domain/${id}`);
+      return response.data;
+    } catch (error) {
+      throw new Error(`${error}`);
     }
-
+  }
 }

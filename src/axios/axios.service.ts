@@ -1,17 +1,13 @@
-import { Axios, AxiosRequestConfig } from "axios";
+import { Axios } from 'axios';
 
 export class AxiosClient extends Axios {
-    constructor(
-        private token: string,
-    ) {
-        super(
-            {
-                baseURL: "http://localhost:3000/v1",
-                headers: {
-                    "Content-Type": "application/json",
-                    "apikey": token
-                }
-            }
-        );
-    }
+  constructor(token: string) {
+    super({
+      baseURL: 'https://api.baseverify.com/v1',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: token,
+      },
+    });
+  }
 }
