@@ -22,7 +22,6 @@ async function build() {
     sourcemap: false,
   });
 
-  console.log(generator, 'code');
   const minified = uglifyEs.minify(generator.output[0].code);
 
   if (minified.error) throw minified.error;
