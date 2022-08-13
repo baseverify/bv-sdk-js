@@ -31,6 +31,7 @@ module.exports = {
       {
         npmPublish: true,
         pkgRoot: 'dist',
+        tag: 'latest',
       },
     ],
     [

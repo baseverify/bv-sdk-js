@@ -14,6 +14,10 @@
     "build": "run-s _clear _tsc _make-bundle",
     "release": "semantic-release --release-config semantic-release.config.js"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "tag": "latest"
+  },
   "repository": "https://github.com/baseverify/bv-sdk-js.git",
   "license": "MIT",
   "private": false,
