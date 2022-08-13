@@ -1,6 +1,6 @@
 {
   "name": "@baseverify/sdk-js",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Base Verify javascript sdk",
   "main": "dist/sdk-js.min.js",
   "types": "dist/sdk-js.d.ts",
@@ -11,12 +11,18 @@
     "_clear": "rimraf compiled/* dist/*",
     "_tsc": "tsc",
     "_make-bundle": "node make-bundle",
-    "build": "run-s _clear _tsc _make-bundle"
+    "build": "run-s _clear _tsc _make-bundle",
+    "release": "semantic-release --release-config semantic-release.config.js"
   },
   "repository": "https://github.com/baseverify/bv-sdk-js.git",
   "license": "MIT",
   "private": true,
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/commit-analyzer": "^9.0.2",
+    "@semantic-release/github": "^8.0.5",
+    "@semantic-release/npm": "^9.0.1",
+    "@semantic-release/release-notes-generator": "^10.0.3",
     "@trivago/prettier-plugin-sort-imports": "^3.3.0",
     "@typescript-eslint/eslint-plugin": "^5.31.0",
     "@typescript-eslint/parser": "^5.31.0",
@@ -31,6 +37,7 @@
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.77.3",
+    "semantic-release": "^19.0.3",
     "ts-node": "^10.9.1",
     "typescript": "^4.7.4",
     "uglify-es": "^3.3.9"

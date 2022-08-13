@@ -10,6 +10,7 @@ export class BaseVerify {
   address: Address;
   domain: Domain;
   email: Email;
+
   constructor(token: string) {
     this.axiosClient = new AxiosClient(token);
     this.phone = new Phone(this.axiosClient);
