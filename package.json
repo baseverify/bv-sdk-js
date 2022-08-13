@@ -16,7 +16,8 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "tag": "latest"
+    "tag": "latest",
+    "access": "public"
   },
   "repository": "https://github.com/baseverify/bv-sdk-js.git",
   "license": "MIT",
