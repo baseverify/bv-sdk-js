@@ -1,8 +1,8 @@
 import { AxiosClient } from './axios/axios.service';
-import { Address } from './services/address/address';
-import { Domain } from './services/domain/domain';
-import { Email } from './services/email/email';
-import { Phone } from './services/phone/phone';
+import { Address } from './services/address';
+import { Domain } from './services/domain';
+import { Email } from './services/email';
+import { Phone } from './services/phone';
 
 export class BaseVerify {
   private axiosClient: AxiosClient;
