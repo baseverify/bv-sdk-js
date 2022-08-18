@@ -32,8 +32,8 @@ export class Email {
   }
 
   async list(
-    pagination: Pagination,
-    filter: Filter,
+    pagination?: Pagination,
+    filter?: Filter,
   ): Promise<Email[]> {
     try {
       const response = await this.axiosClient.get('/email', { params: { ...pagination, ...filter } });

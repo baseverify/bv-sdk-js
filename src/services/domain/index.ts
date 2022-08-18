@@ -23,7 +23,7 @@ export class Domain {
     }
   }
 
-  async list(pagination: Pagination, filter: Filter): Promise<DomainType[]> {
+  async list(pagination?: Pagination, filter?: Filter): Promise<DomainType[]> {
     try {
       const response = await this.axiosClient.get('/domain', { params: { ...pagination, ...filter } });
       return response.data;

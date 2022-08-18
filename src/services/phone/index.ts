@@ -23,10 +23,7 @@ export class Phone {
     }
   }
 
-  async list(
-    pagination: Pagination,
-    filter: Filter,
-  ): Promise<GetAllPhone> {
+  async list(pagination?: Pagination, filter?: Filter): Promise<GetAllPhone> {
     try {
       const response = await this.axiosClient.get('/phone', { params: { ...pagination, ...filter } });
       return response.data;
