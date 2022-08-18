@@ -1,6 +1,6 @@
 import { AxiosClient } from '../../axios/axios.service';
 import { CreateAddress, Filter, Pagination, VerifyAddress } from '../../interfaces/create.interface';
-import { AddressData, AddressType } from '../../interfaces/response.interface';
+import { AddressData, AddressType, GetManyAddressDataObject } from '../../interfaces/response.interface';
 
 export class Address {
   constructor(private axiosClient: AxiosClient) { }
@@ -14,7 +14,7 @@ export class Address {
     }
   }
 
-  async list(pagination?: Pagination, filter?: Filter): Promise<AddressType[]> {
+  async list(pagination?: Pagination, filter?: Filter): Promise<GetManyAddressDataObject> {
     try {
       const response = await this.axiosClient.get('/address', { params: { ...pagination, ...filter } });
       return response.data;
