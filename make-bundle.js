@@ -13,9 +13,6 @@ const compiledPath = path.join(__dirname, 'compiled');
 const distNpmPath = path.join(__dirname, 'dist');
 
 async function build() {
-  console.log(compiledPath, 'compiledPath');
-  console.log(srcPath, 'srcPath');
-  console.log(distNpmPath, 'distNpmPath');
   const bundle = await rollup.rollup({
     input: path.join(compiledPath, 'index.js'),
   });
@@ -30,6 +27,9 @@ async function build() {
   if (minified.error) throw minified.error;
   await writeFile(path.join(distNpmPath, `${packageName}.min.js`), minified.code);
   await writeFile(path.join(distNpmPath, `${packageName}.d.ts`), await makeDefinitionsCode());
+
+  const file = await readFile(path.join(distNpmPath, `${packageName}.min.js`), 'utf-8');
+  console.log(file);
 }
 
 async function makeDefinitionsCode() {
