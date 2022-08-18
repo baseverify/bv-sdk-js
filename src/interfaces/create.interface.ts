@@ -3,10 +3,25 @@ export enum VERIFCATION_TYPE {
   TOKEN = 'TOKEN',
 }
 
+export enum STATUS {
+  VERIFIED = 'VERIFIED',
+  UNVERIFIED = 'UNVERIFIED',
+  INVALID = 'INVALID',
+}
+
+export interface Pagination {
+  page: number;
+  limit: number;
+}
+
+export interface Filter {
+  status: STATUS;
+}
+
 export interface CreatePhone {
   phone: string;
   verificationType: VERIFCATION_TYPE;
-  redirectUri: string;
+  redirectUri?: string;
 }
 
 export interface CreateManyPhones {

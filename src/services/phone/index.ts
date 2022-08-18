@@ -1,9 +1,9 @@
 import { AxiosClient } from '../../axios/axios.service';
-import { CreateManyPhones, CreatePhone, VerifyPhone } from '../../interfaces/create.interface';
+import { CreateManyPhones, CreatePhone, Filter, Pagination, VerifyPhone } from '../../interfaces/create.interface';
 import { GetAllPhone, GetPhone } from '../../interfaces/response.interface';
 
 export class Phone {
-  constructor(private axiosClient: AxiosClient) {}
+  constructor(private axiosClient: AxiosClient) { }
 
   async create(createPhone: CreatePhone): Promise<any> {
     try {
@@ -23,9 +23,12 @@ export class Phone {
     }
   }
 
-  async list(): Promise<GetAllPhone> {
+  async list(
+    pagination: Pagination,
+    filter: Filter,
+  ): Promise<GetAllPhone> {
     try {
-      const response = await this.axiosClient.get('/phone');
+      const response = await this.axiosClient.get('/phone', { params: { ...pagination, ...filter } });
       return response.data;
     } catch (error) {
       throw new Error(`${error}`);

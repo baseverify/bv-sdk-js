@@ -1,9 +1,9 @@
 import { AxiosClient } from '../../axios/axios.service';
-import { CreateDomain, createManyDomain } from '../../interfaces/create.interface';
+import { CreateDomain, createManyDomain, Filter, Pagination } from '../../interfaces/create.interface';
 import { DomainCreateMany, DomainType } from '../../interfaces/response.interface';
 
 export class Domain {
-  constructor(private axiosClient: AxiosClient) {}
+  constructor(private axiosClient: AxiosClient) { }
 
   async create(createDomain: CreateDomain): Promise<String> {
     try {
@@ -23,9 +23,9 @@ export class Domain {
     }
   }
 
-  async list(): Promise<DomainType[]> {
+  async list(pagination: Pagination, filter: Filter): Promise<DomainType[]> {
     try {
-      const response = await this.axiosClient.get('/domain');
+      const response = await this.axiosClient.get('/domain', { params: { ...pagination, ...filter } });
       return response.data;
     } catch (error) {
       throw new Error(`${error}`);
