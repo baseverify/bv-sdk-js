@@ -14,7 +14,8 @@
     "release": "semantic-release --release-config semantic-release.config.js",
     "postversion": "cp -r package.json dist",
     "build:prod": "webpack --mode=production",
-    "prepublishOnly": "webpack --mode=production"
+    "prepublishOnly": "webpack --mode=production",
+    "preinstall": "yarn"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -56,7 +57,7 @@
     "webpack-cli": "^4.10.0",
     "webpack-node-externals": "^3.0.0"
   },
-  "peerDependencies": {
+  "dependencies": {
     "axios": "^0.27.2"
   }
 }
