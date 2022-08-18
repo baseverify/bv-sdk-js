@@ -1,5 +1,5 @@
 import { AxiosClient } from './axios/axios.service';
-import { VERIFCATION_TYPE } from './interfaces/create.interface';
+import './interfaces';
 import { Address } from './services/address';
 import { Domain } from './services/domain';
 import { Email } from './services/email';
@@ -20,5 +20,3 @@ export class BaseVerify {
     this.email = new Email(this.axiosClient);
   }
 }
-
-const bv = new BaseVerify('YOUR_TOKEN');
