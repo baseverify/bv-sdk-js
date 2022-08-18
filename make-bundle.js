@@ -13,6 +13,9 @@ const compiledPath = path.join(__dirname, 'compiled');
 const distNpmPath = path.join(__dirname, 'dist');
 
 async function build() {
+  console.log(compiledPath, 'compiledPath');
+  console.log(srcPath, 'srcPath');
+  console.log(distNpmPath, 'distNpmPath');
   const bundle = await rollup.rollup({
     input: path.join(compiledPath, 'index.js'),
   });
