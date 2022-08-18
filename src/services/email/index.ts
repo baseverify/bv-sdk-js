@@ -3,13 +3,15 @@ import {
   CreateEmail,
   CreateManyEmails,
   CreateManyPhones,
+  Filter,
+  Pagination,
   VerifyEmail,
   VerifyPhone,
 } from '../../interfaces/create.interface';
 import { CreateManyEmailsData } from '../../interfaces/response.interface';
 
 export class Email {
-  constructor(private axiosClient: AxiosClient) {}
+  constructor(private axiosClient: AxiosClient) { }
 
   async create(createEmail: CreateEmail): Promise<any> {
     try {
@@ -29,9 +31,12 @@ export class Email {
     }
   }
 
-  async list(): Promise<Email[]> {
+  async list(
+    pagination?: Pagination,
+    filter?: Filter,
+  ): Promise<Email[]> {
     try {
-      const response = await this.axiosClient.get('/email');
+      const response = await this.axiosClient.get('/email', { params: { ...pagination, ...filter } });
       return response.data;
     } catch (error) {
       throw new Error(`${error}`);
