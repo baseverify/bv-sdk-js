@@ -7,8 +7,10 @@
     "skipLibCheck": true /* Skip type checking of declaration files. */,
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
     "declaration": true,
-    "outDir": "./compiled",
-    "watch": false
+    "sourceMap": true,
+    "outDir": "lib",
+    "watch": false,
+    "lib": ["es2015"]
   },
   "include": ["src"]
 }
