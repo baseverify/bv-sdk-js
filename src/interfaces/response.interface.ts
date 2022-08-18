@@ -28,14 +28,16 @@ export interface GetAllPhone {
     updatedAt: Date;
 }
 
+export interface GetAllPhoneData {
+    items: GetAllPhone[];
+    metadata: Metadata;
+}
+
 export interface GetAllPhoneRootObject {
     status: boolean;
     statusCode: number;
     message: string;
-    data: {
-        items: GetAllPhone[];
-        metadata: Metadata;
-    };
+    data: GetAllPhoneData;
 }
 
 export interface CreatePhoneRootObject {
@@ -189,7 +191,12 @@ export interface GetSingleAddressRootObject {
     data: AddressType;
 }
 
-export interface GetManyRootObject {
+export interface GetManyAddressDataObject {
+    items: AddressType[];
+    metadata: Metadata;
+}
+
+export interface GetManyAddressRootObject {
     status: boolean;
     statusCode: number;
     message: string;
