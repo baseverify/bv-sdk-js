@@ -13,7 +13,7 @@
     "_make-bundle": "node make-bundle",
     "build": "run-s _clear _tsc _make-bundle",
     "release": "semantic-release --release-config semantic-release.config.js",
-    "postversion": "cp -r package.json dist/"
+    "postversion": "cp -r package.json dist"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
