@@ -2,6 +2,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 const TypescriptDeclarationPlugin = require('typescript-declaration-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   target: 'node',
@@ -21,7 +22,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'index.js',
+    filename: '[name].js',
     libraryTarget: 'umd',
     umdNamedDefine: true,
     library: 'baseverify',
