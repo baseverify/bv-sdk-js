@@ -2,7 +2,7 @@
   "name": "@baseverify/sdk-js",
   "version": "0.0.0",
   "description": "Base Verify javascript sdk",
-  "main": "dist/index.js",
+  "main": "dist/main.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
