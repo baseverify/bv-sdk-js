@@ -1,9 +1,10 @@
-import { Axios } from 'axios';
+import axios, { Axios } from 'axios';
 
 export class AxiosClient extends Axios {
   constructor(token: string) {
     super({
-      baseURL: 'https://api.baseverify.com/v1',
+      ...axios.defaults,
+      baseURL: 'https://api-dev.baseverify.com/v1',
       headers: {
         'Content-Type': 'application/json',
         apikey: token,

@@ -9,23 +9,34 @@ export enum STATUS {
   INVALID = 'INVALID',
 }
 
+export enum RECORD_STATUS {
+  PENDING = 'PENDING',
+  VERIFIED = 'VERIFIED',
+  INVALID = 'INVALID',
+}
+
 export interface Pagination {
   page: number;
   limit: number;
 }
 
+export enum ADDRESS_VERIFICATION_TYPE {
+  EXPRESS='EXPRESS',
+  POSTCARD='POSTCARD'
+};
+
 export interface Filter {
-  status: STATUS;
+  status: RECORD_STATUS;
 }
 
 export interface CreatePhone {
-  phone: string;
+  number: string;
   verificationType: VERIFCATION_TYPE;
   redirectUri?: string;
 }
 
 export interface CreateManyPhones {
-  phones: CreatePhone[];
+  phone: CreatePhone[];
 }
 
 export interface VerifyPhone {
@@ -40,10 +51,13 @@ export interface CreateAddress {
   city: string;
   state: string;
   country: string;
+  type: ADDRESS_VERIFICATION_TYPE,
+  zipCode: string;
 }
 
 export interface VerifyAddress {
   identifier: string;
+  otp: string;
 }
 
 export interface CreateDomain {
@@ -61,7 +75,7 @@ export interface CreateEmail {
 }
 
 export interface CreateManyEmails {
-  emails: CreateEmail[];
+  email: CreateEmail[];
 }
 
 export interface DeleteEmail {

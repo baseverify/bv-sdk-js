@@ -34,7 +34,7 @@ export class Address {
 
   async verify(verifyAddress: VerifyAddress): Promise<AddressType> {
     try {
-      const response = await this.axiosClient.patch('/address/verify', verifyAddress);
+      const response = await this.axiosClient.patch('/address', verifyAddress);
       return response.data;
     } catch (error) {
       throw new Error(String(error));
