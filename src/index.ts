@@ -1,5 +1,4 @@
 import { AxiosClient } from './axios/axios.service';
-import './interfaces';
 import { Address } from './services/address';
 import { Domain } from './services/domain';
 import { Email } from './services/email';

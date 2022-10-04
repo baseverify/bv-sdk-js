@@ -2,14 +2,14 @@
   "name": "@baseverify/sdk-js",
   "version": "0.0.0",
   "description": "Base Verify javascript sdk",
-  "main": "dist/main.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/main.js",
+  "types": "lib/index.d.ts",
   "files": [
-    "dist"
+    "lib"
   ],
   "scripts": {
-    "start": "concurrently --kill-others \"tsc -w\" \"nodemon --delay 1 dist/index.js\"",
-    "compile": "tsc && node dist/index.js",
+    "start": "concurrently --kill-others \"tsc -w\" \"nodemon --delay 1 lib/index.js\"",
+    "compile": "tsc && node lib/index.js",
     "dev": "nodemon -e ts --exec \"yarn compile\"",
     "release": "semantic-release --release-config semantic-release.config.js",
     "postversion": "cp -r package.json dist",
