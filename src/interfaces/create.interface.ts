@@ -46,6 +46,7 @@ export interface VerifyPhone {
 
 export interface CreateAddress {
   customerName: string;
+  customerEmail: string;
   address: string;
   address2: string;
   city: string;
