@@ -1,32 +1,105 @@
-import { AxiosClient } from '../../axios/axios.service';
-import { CreateManyPhones, CreatePhone, Filter, Pagination, VerifyPhone } from '../../interfaces/create.interface';
-import { GetAllPhone, GetAllPhoneData, GetPhone } from '../../interfaces/response.interface';
+import { GraphQLClient, gql } from 'graphql-request';
+
+import { CreateManyPhoneDto, CreatePhoneDto, DeletePhoneDto, FindManyAddressDto, VerifyPhoneDto } from '../../interfaces';
+// import { CreateManyPhones, CreatePhone, Filter, Pagination, VerifyPhone } from '../../interfaces/create.interface';
+import { GetAllPhoneData, GetPhone } from '../../interfaces/response.interface';
 
 export class Phone {
-  constructor(private axiosClient: AxiosClient) { }
-
-  async create(createPhone: CreatePhone): Promise<any> {
+  constructor(private graphQLClient: GraphQLClient) {}
+  async create(createPhoneDto: CreatePhoneDto): Promise<any> {
     try {
-      const response = await this.axiosClient.post('/phone', createPhone);
-      return response.data;
+      const mutation = gql`
+        mutation Phone_phoneCreate($createPhoneDto: CreatePhoneDto!) {
+          phone_phoneCreate(createPhoneDto: $createPhoneDto) {
+            id
+            requesterId
+            number
+            identifier
+            verificationType
+            tier
+            status
+            verifiedAt
+            createdAt
+            updatedAt
+            deleted
+          }
+        }
+      `;
+      const variables = {
+        createPhoneDto,
+      };
+      const response = await this.graphQLClient.request(mutation, variables);
+      return response;
     } catch (error: any) {
       throw new Error(error);
     }
   }
 
-  async createMany(createManyPhones: CreateManyPhones): Promise<any> {
+  async createMany(createManyPhoneDto: CreateManyPhoneDto): Promise<any> {
     try {
-      const response = await this.axiosClient.post('/phone/create-many', createManyPhones);
-      return response.data;
+      const mutation = gql`
+        mutation Phone_phoneCreateMany($createManyPhoneDto: CreateManyPhoneDto!) {
+          phone_phoneCreateMany(createManyPhoneDto: $createManyPhoneDto) {
+            id
+            requesterId
+            number
+            identifier
+            verificationType
+            tier
+            status
+            verifiedAt
+            createdAt
+            updatedAt
+            deleted
+          }
+        }
+      `;
+      const variables = {
+        createManyPhoneDto,
+      };
+      const response = await this.graphQLClient.request(mutation, variables);
+      return response;
     } catch (error: any) {
       throw new Error(error);
     }
   }
 
-  async list(pagination?: Pagination, filter?: Filter): Promise<GetAllPhoneData> {
+  async list(findManyAddressDto?: FindManyAddressDto): Promise<GetAllPhoneData> {
     try {
-      const response = await this.axiosClient.get('/phone', { params: { ...pagination, ...filter } });
-      return response.data;
+      const query = gql`
+        query getAllPhone($findManyAddressDto: FindManyPhoneDto!) {
+          phone_phoneList(findManyAddressDto: $findManyAddressDto) {
+            data {
+              id
+              requesterId
+              number
+              identifier
+              verificationType
+              tier
+              status
+              verifiedAt
+              createdAt
+              updatedAt
+              deleted
+            }
+            metadata {
+              page
+              limit
+              total {
+                pages
+                records
+              }
+            }
+          }
+        }
+      `;
+
+      const variables = {
+        findManyAddressDto: findManyAddressDto,
+      };
+
+      const response = await this.graphQLClient.request(query, variables);
+      return response;
     } catch (error: any) {
       throw new Error(error);
     }
@@ -34,26 +107,54 @@ export class Phone {
 
   async get(id: string): Promise<GetPhone> {
     try {
-      const response = await this.axiosClient.get(`/phone/${id}`);
-      return response.data;
+      const query = gql`query Phone_phoneShow($phonePhoneShowId: String!) {
+        phone_phoneShow(id: {"phonePhoneShowId": "${id}"}) {
+          id
+          requesterId
+          number
+          identifier
+          verificationType
+          tier
+          status
+          verifiedAt
+          createdAt
+          updatedAt
+          deleted
+        }
+      }`;
+      const response = await this.graphQLClient.request(query);
+      return response;
     } catch (error: any) {
       throw new Error(error);
     }
   }
 
-  async verify(verifyPhone: VerifyPhone): Promise<any> {
+  async verify(verifyPhoneDto: VerifyPhoneDto): Promise<any> {
     try {
-      const response = await this.axiosClient.patch('/phone/verify', verifyPhone);
-      return response.data;
+      const mutation = gql`mutation Phone_phoneVerify($verifyPhoneDto: VerifyPhoneDto!) {
+        phone_phoneVerify(verifyPhoneDto: $verifyPhoneDto)
+      }`
+      
+      const variables = {
+        verifyPhoneDto
+      }
+      const response = await this.graphQLClient.request(mutation, variables);
+      return response;
     } catch (error: any) {
       throw new Error(error);
     }
   }
 
-  async delete(id: string): Promise<any> {
+  async delete(deletePhoneDto: DeletePhoneDto): Promise<any> {
     try {
-      const response = await this.axiosClient.delete(`/phone/${id}`);
-      return response.data;
+      const mutation = gql`mutation Phone_phoneDelete($deletePhoneDto: DeletePhoneDto!) {
+        phone_phoneDelete(deletePhoneDto: $deletePhoneDto)
+      }`
+      const variables = {
+        deletePhoneDto
+      }
+      const response = await this.graphQLClient.request(mutation, variables);
+      return response;
     } catch (error: any) {
       throw new Error(error);
     }
