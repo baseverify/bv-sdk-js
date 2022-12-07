@@ -17,8 +17,8 @@ export class BaseVerify {
     this.axiosClient = new AxiosClient(token);
     this.graphQLClient = new GraphQLClient(token);
     this.phone = new Phone(this.graphQLClient);
-    this.address = new Address(this.axiosClient);
+    this.address = new Address(this.graphQLClient);
     this.domain = new Domain(this.axiosClient);
-    this.email = new Email(this.axiosClient);
+    this.email = new Email(this.graphQLClient);
   }
 }

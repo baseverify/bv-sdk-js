@@ -1,6 +1,6 @@
 import { GraphQLClient, gql } from 'graphql-request';
 
-import { CreateManyPhoneDto, CreatePhoneDto, DeletePhoneDto, FindManyAddressDto, VerifyPhoneDto } from '../../interfaces';
+import { CreateManyPhoneDto, CreatePhoneDto, DeletePhoneDto, FindManyPhonesDto, VerifyPhoneDto } from '../../interfaces';
 // import { CreateManyPhones, CreatePhone, Filter, Pagination, VerifyPhone } from '../../interfaces/create.interface';
 import { GetAllPhoneData, GetPhone } from '../../interfaces/response.interface';
 
@@ -64,7 +64,7 @@ export class Phone {
     }
   }
 
-  async list(findManyAddressDto?: FindManyAddressDto): Promise<GetAllPhoneData> {
+  async list(findManyAddressDto?: FindManyPhonesDto): Promise<GetAllPhoneData> {
     try {
       const query = gql`
         query getAllPhone($findManyAddressDto: FindManyPhoneDto!) {
