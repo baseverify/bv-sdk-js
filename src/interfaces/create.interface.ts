@@ -20,6 +20,11 @@ export enum RECORD_STATUS {
   CANCELLED = 'CANCELLED',
 }
 
+export enum ADDRESS_VERIFICATION_TYPE {
+  EXPRESS='EXPRESS',
+  POSTCARD='POSTCARD'
+};
+
 export interface Filter {
   status: REQUEST_STATUS;
 }

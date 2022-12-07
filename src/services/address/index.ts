@@ -140,6 +140,7 @@ export class Address {
 
   async delete(removeAddressDto: RemoveAddressDto): Promise<AddressType> {
     try {
+<<<<<<< HEAD
       const mutation = gql`mutation Address_addressDelete($removeAddressDto: RemoveAddressDto!) {
         address_addressDelete(removeAddressDto: $removeAddressDto)
       }`
@@ -149,6 +150,10 @@ export class Address {
       }
       const response = await this.graphQLClient.request(mutation, variables);
       return response;
+=======
+      const response = await this.axiosClient.patch('/address', verifyAddress);
+      return response.data;
+>>>>>>> 4d0591521b550fd38f1bcd57367ff923d992d3d2
     } catch (error) {
       throw new Error(String(error));
     }
