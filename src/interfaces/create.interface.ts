@@ -93,6 +93,24 @@ export interface DeleteEmailDto {
   email: string;
 }
 
+export interface CreateDomainDto {
+  domain: string;
+  email?: string;
+}
+
+export interface CreateManyDomainDto {
+  domain: CreateDomainDto[];
+}
+
+  export interface FindManyDomainDto {
+      filter: Filter;
+      pagination: Pagination;
+  }
+
+  export interface DeleteDomainDto {
+    id: string;
+}
+
 // export enum STATUS {
 //   VERIFIED = 'VERIFIED',
 //   UNVERIFIED = 'UNVERIFIED',

@@ -1,4 +1,4 @@
-import { STATUS } from "./create.interface";
+import { RECORD_STATUS } from "./create.interface";
 
 export interface Requester {
     name: string;
@@ -22,7 +22,7 @@ export interface GetAllPhone {
     identifier: string;
     verificationType: string;
     number: string;
-    status: STATUS;
+    status: RECORD_STATUS;
     verifiedAt?: Date;
     createdAt: Date;
     updatedAt: Date;
@@ -53,7 +53,7 @@ export interface GetPhone {
     identifier: string;
     verificationType: string;
     number: string;
-    status: STATUS;
+    status: RECORD_STATUS;
     verifiedAt?: any;
     createdAt: Date;
     updatedAt: Date;
@@ -93,7 +93,7 @@ export interface EmailData {
     requester: Requester;
     identifier: string;
     email: string;
-    status: STATUS;
+    status: RECORD_STATUS;
     verifiedAt?: any;
     createdAt: Date;
     updatedAt: Date;
@@ -158,7 +158,7 @@ export interface AddressType {
     zipCode: string;
     country: string;
     otp: string;
-    status: STATUS;
+    status: RECORD_STATUS;
     verifiedAt?: any;
     createdAt: Date;
     updatedAt: Date;
@@ -228,7 +228,7 @@ export interface DomainType {
     requester: Requester;
     name: string;
     email: string;
-    status: STATUS;
+    status: RECORD_STATUS;
     verifiedAt?: any;
     deleted: boolean;
     createdAt: Date;
