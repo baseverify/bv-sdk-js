@@ -8,7 +8,7 @@ import {
   VerifyEmail,
   VerifyPhone,
 } from '../../interfaces/create.interface';
-import { CreateManyEmailsData } from '../../interfaces/response.interface';
+import { Email as EmailInterface } from '../../interfaces/response.interface';
 
 export class Email {
   constructor(private axiosClient: AxiosClient) { }
@@ -22,7 +22,7 @@ export class Email {
     }
   }
 
-  async createMany(createManyEmails: CreateManyEmails): Promise<CreateManyEmailsData> {
+  async createMany(createManyEmails: EmailInterface): Promise<EmailInterface> {
     try {
       const response = await this.axiosClient.post('/email/create-many', createManyEmails);
       return response.data;
