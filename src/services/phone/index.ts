@@ -2,7 +2,7 @@ import { GraphQLClient, gql } from 'graphql-request';
 
 import { CreateManyPhoneDto, CreatePhoneDto, DeletePhoneDto, FindManyPhonesDto, VerifyPhoneDto } from '../../interfaces';
 // import { CreateManyPhones, CreatePhone, Filter, Pagination, VerifyPhone } from '../../interfaces/create.interface';
-import { GetAllPhoneData, GetPhone } from '../../interfaces/response.interface';
+// import { GetAllPhoneData, GetPhone } from '../../interfaces/response.interface';
 
 export class Phone {
   constructor(private graphQLClient: GraphQLClient) {}

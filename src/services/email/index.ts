@@ -1,7 +1,7 @@
 import { GraphQLClient, gql } from 'graphql-request';
 
 import { AxiosClient } from '../../axios/axios.service';
-import { CreateEmailDto, DeleteEmailDto, FindManyEmailDto } from '../../interfaces';
+import { CreateEmailDto, CreateManyEmailDto, DeleteEmailDto, FindManyEmailDto } from '../../interfaces';
 //   CreateEmail,
 //   CreateEmailDto,
 //   CreateManyEmails,
@@ -48,7 +48,7 @@ export class Email {
     }
   }
 
-  async createMany(createManyEmails: CreateManyEmailsData): Promise<CreateManyEmailsData> {
+  async createMany(createManyEmailDto: CreateManyEmailDto): Promise<CreateManyEmailsData> {
     try {
       const mutation = gql`
         mutation Email_emailCreateMany($createManyEmailDto: CreateManyEmailDto!) {
@@ -68,7 +68,7 @@ export class Email {
       `;
 
       const variables = {
-        createManyEmails,
+        createManyEmails: createManyEmailDto,
       };
       const response = await this.graphQLClient.request(mutation, variables);
       return response;
