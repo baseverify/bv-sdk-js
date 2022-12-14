@@ -23,7 +23,7 @@
 //     verificationType: string;
 //     number: string;
 //     status: STATUS;
-//     verifiedAt?: Date;
+//     verifiedAt?: Date | null;
 //     createdAt: Date;
 //     updatedAt: Date;
 // }
@@ -277,7 +277,7 @@ export interface Email {
     email: string;
     tier: string;
     status: string;
-    verifiedAt?: any;
+    verifiedAt?: Date | null;
     createdAt: Date;
     updatedAt: Date;
     deleted: boolean;
@@ -294,7 +294,7 @@ export interface Phone {
     verificationType: string;
     tier: string;
     status: string;
-    verifiedAt?: any;
+    verifiedAt?: Date | null;
     createdAt: Date;
     updatedAt: Date;
     deleted: boolean;
@@ -313,39 +313,294 @@ export interface PhoneDelete {
     data: DataForPhoneDelete;
 }
 
-    export interface DomainDomainCreate {
+//DOMAINS
+
+//domain create
+    export interface DomainCreate {
         txtRecord: string;
     }
 
-    export interface Data {
-        domain_domainCreate: DomainDomainCreate;
+    export interface DomainCreateData {
+        domainCreateData: DomainCreate;
     }
 
-    export interface RootObject {
-        data: Data;
+    export interface DomainCreateResponse {
+        data: DomainCreateData;
     }
-        export interface Datum {
+
+    //domain create many
+
+    export interface DomainCreateDataMany {
+        domain_domainCreateMany: DomainCreate[];
+    }
+
+    export interface DomainCreateManyResponse {
+        data: DomainCreateDataMany;
+    }
+
+    //list domain
+    export interface Domain {
             id: string;
             requesterId: string;
             name: string;
             email: string;
             tier: string;
             status: string;
-            verifiedAt?: any;
+            verifiedAt?: Date | null;
             createdAt: Date;
             updatedAt: Date;
             deleted: boolean;
         }
     
-        export interface DomainDomainList {
-            data: Datum[];
+        export interface PaginatedDomain {
+            data: Domain[];
             metadata: Metadata;
         }
     
-        export interface Data {
-            domain_domainList: DomainDomainList;
+        export interface PaginatedDomainData {
+            paginatedDomain: PaginatedDomain;
         }
     
-        export interface RootObject {
-            data: Data;
-        }    
+        export interface DomainListResponse {
+            data: PaginatedDomainData;
+        }
+
+        // domain show
+
+        export interface ShowSingleDomainData {
+            domain: Domain;
+        }
+
+        export interface ShowSingleDomain {
+            data: ShowSingleDomainData;
+        }
+
+// Domain delete
+
+export interface DomainDeleteMessage {
+    domain_domainDelete: string;
+}
+
+export interface DomainDeleteResponse {
+    data: DomainDeleteMessage;
+}
+
+
+
+
+
+
+// Email Create 
+
+
+export interface EmailCreateData {
+    email_emailCreate: Email;
+}
+
+export interface EmailCreateResponse {
+    data: EmailCreateData;
+}
+
+// Create Many Email
+
+
+
+
+export interface EmailCreateManyData {
+    email_emailCreateMany: Email[];
+}
+
+export interface CreateManyDataResponse {
+    data: EmailCreateManyData;
+}
+
+
+// Email List
+
+
+
+
+
+
+export interface EmailList {
+    metadata: Metadata;
+    data: Email[];
+}
+
+export interface EmailListData {
+    email_emailList: EmailList;
+}
+
+export interface EmailListResonse {
+    data: EmailListData;
+}
+
+// Email Get
+
+
+   
+
+    export interface EmailSingleData {
+        email_emailShow: Email;
+    }
+
+    export interface SingleEmailResponse {
+        data: EmailSingleData;
+    }
+
+
+
+// Email Delete
+
+
+    export interface EmailDeleteData {
+        email_emailDelete: string;
+    }
+
+    export interface EmailDeleteResponse {
+        data: EmailDeleteData;
+    }
+
+// Create Phone
+
+
+
+
+    export interface NumberCreateData {
+        phone_phoneCreate: Phone;
+    }
+
+    export interface NumberCreateResponse {
+        data: NumberCreateData;
+    }
+
+// create Many Phone
+
+
+  
+
+    export interface PhoneManyData {
+        phone_phoneCreateMany: Phone[];
+    }
+
+    export interface PhoneManyResponse {
+        data: PhoneManyData;
+    }
+
+// Phone list
+
+
+   
+
+   
+
+    export interface PhoneList {
+        metadata: Metadata;
+        data: Phone[];
+    }
+
+    export interface PhoneListData {
+        phone_phoneList: PhoneList;
+    }
+
+    export interface PhoneListResponse {
+        data: PhoneListData;
+    }
+
+
+// Get One Phone
+
+    export interface SinglePhoneData {
+        phone_phoneShow: Phone;
+    }
+
+    export interface SinglePhoneResponse {
+        data: SinglePhoneData;
+    }
+
+// Verify Phone
+
+
+    export interface PhoneVerifyData {
+        phone_phoneVerify: string;
+    }
+
+    export interface PhoneVerifyResponse {
+        data: PhoneVerifyData;
+    }
+
+
+// Delete Phone
+
+    export interface PhoneDeleteData {
+        phone_phoneDelete: string;
+    }
+
+    export interface PhoneDeleteResponse {
+        data: PhoneDeleteData;
+    }
+
+
+// Create Address
+
+
+    export interface Address {
+        id: string;
+        requesterId: string;
+        identifier: string;
+        customerName: string;
+        tier: string;
+        address: string;
+        address2: string;
+        city: string;
+        state: string;
+        zipCode: string;
+        country: string;
+        otp?: any;
+        status: string;
+        verifiedAt?: Date | null;
+        createdAt: Date;
+        updatedAt: Date;
+        deleted: boolean;
+    }
+
+    export interface AddressCreateData {
+        address_addressCreate: Address;
+    }
+
+    export interface AddresscreateResponse {
+        data: AddressCreateData;
+    }
+
+
+// Delete Address
+
+
+    export interface AddressDeleteData {
+        address_addressDelete: string;
+    }
+
+    export interface AddressDeleteResponse {
+        data: AddressDeleteData;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

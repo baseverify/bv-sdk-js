@@ -11,7 +11,7 @@ import { CreateEmailDto, CreateManyEmailDto, DeleteEmailDto, FindManyEmailDto } 
 //   VerifyEmail,
 //   VerifyPhone,
 // } from '../../interfaces/create.interface';
-import { CreateManyEmailsData } from '../../interfaces/response.interface';
+import { CreateManyDataResponse, CreateManyEmailsData, EmailCreateResponse, EmailDeleteResponse, EmailListResonse, SingleEmailResponse } from '../../interfaces/response.interface';
 
 export class Email {
   constructor(
@@ -19,7 +19,7 @@ export class Email {
     private graphQLClient: GraphQLClient
   ) {}
 
-  async create(createEmailDto: CreateEmailDto): Promise<any> {
+  async create(createEmailDto: CreateEmailDto): Promise<EmailCreateResponse> {
     try {
       const mutation = gql`
         mutation Email_emailCreate($createEmailDto: CreateEmailDto!) {
@@ -41,14 +41,14 @@ export class Email {
       const variables = {
         createEmailDto,
       };
-      const response = await this.graphQLClient.request(mutation, variables);
+      const response:EmailCreateResponse = await this.graphQLClient.request(mutation, variables);
       return response;
     } catch (error) {
       throw new Error(`${error}`);
     }
   }
 
-  async createMany(createManyEmailDto: CreateManyEmailDto): Promise<CreateManyEmailsData> {
+  async createMany(createManyEmailDto: CreateManyEmailDto): Promise<CreateManyDataResponse> {
     try {
       const mutation = gql`
         mutation Email_emailCreateMany($createManyEmailDto: CreateManyEmailDto!) {
@@ -70,14 +70,14 @@ export class Email {
       const variables = {
         createManyEmails: createManyEmailDto,
       };
-      const response = await this.graphQLClient.request(mutation, variables);
+      const response:CreateManyDataResponse = await this.graphQLClient.request(mutation, variables);
       return response;
     } catch (error) {
       throw new Error(`${error}`);
     }
   }
 
-  async list(findManyEmailDto: FindManyEmailDto) {
+  async list(findManyEmailDto: FindManyEmailDto): Promise<EmailListResonse> {
     try {
       const query = gql`
         query Email_emailList($findManyEmailDto: FindManyEmailDto!) {
@@ -109,14 +109,14 @@ export class Email {
       const variables = {
         findManyEmailDto,
       };
-      const response = await this.graphQLClient.request(query, variables);
+      const response:EmailListResonse = await this.graphQLClient.request(query, variables);
       return response;
     } catch (error) {
       throw new Error(`${error}`);
     }
   }
 
-  async get(id: string): Promise<Email> {
+  async get(id: string): Promise<SingleEmailResponse> {
     try {
       const query = gql`query Email_emailShow($emailEmailShowId: String!) {
         email_emailShow(id: {"emailEmailShowId: ${id}"}) {
@@ -133,7 +133,7 @@ export class Email {
         }
       }`;
 
-      const response = await this.graphQLClient.request(query);
+      const response:SingleEmailResponse = await this.graphQLClient.request(query);
       return response;
     } catch (error) {
       throw new Error(`${error}`);
@@ -150,7 +150,7 @@ export class Email {
   // }
 
   //TODO: define Delete Interface
-  async delete(deleteEmailDto: DeleteEmailDto): Promise<string> {
+  async delete(deleteEmailDto: DeleteEmailDto): Promise<EmailDeleteResponse> {
     try {
       const mutation = gql`
         mutation Email_emailDelete($deleteEmailDto: DeleteEmailDto!) {
@@ -160,7 +160,7 @@ export class Email {
       const variables = {
         deleteEmailDto,
       };
-      const response = await this.graphQLClient.request(mutation, variables);
+      const response:EmailDeleteResponse = await this.graphQLClient.request(mutation, variables);
       return response;
     } catch (error) {
       throw new Error(`${error}`);

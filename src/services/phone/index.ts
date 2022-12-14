@@ -1,12 +1,12 @@
 import { GraphQLClient, gql } from 'graphql-request';
 
-import { CreateManyPhoneDto, CreatePhoneDto, DeletePhoneDto, FindManyPhonesDto, VerifyPhoneDto } from '../../interfaces';
+import { CreateManyPhoneDto, CreatePhoneDto, DeletePhoneDto, FindManyPhonesDto, NumberCreateResponse, PhoneDeleteResponse, PhoneListResponse, PhoneManyResponse, PhoneVerifyResponse, SinglePhoneResponse, VerifyPhoneDto } from '../../interfaces';
 // import { CreateManyPhones, CreatePhone, Filter, Pagination, VerifyPhone } from '../../interfaces/create.interface';
 // import { GetAllPhoneData, GetPhone } from '../../interfaces/response.interface';
 
 export class Phone {
   constructor(private graphQLClient: GraphQLClient) {}
-  async create(createPhoneDto: CreatePhoneDto): Promise<any> {
+  async create(createPhoneDto: CreatePhoneDto): Promise<NumberCreateResponse> {
     try {
       const mutation = gql`
         mutation Phone_phoneCreate($createPhoneDto: CreatePhoneDto!) {
@@ -28,14 +28,14 @@ export class Phone {
       const variables = {
         createPhoneDto,
       };
-      const response = await this.graphQLClient.request(mutation, variables);
+      const response:NumberCreateResponse = await this.graphQLClient.request(mutation, variables);
       return response;
     } catch (error: any) {
       throw new Error(error);
     }
   }
 
-  async createMany(createManyPhoneDto: CreateManyPhoneDto): Promise<any> {
+  async createMany(createManyPhoneDto: CreateManyPhoneDto): Promise<PhoneManyResponse> {
     try {
       const mutation = gql`
         mutation Phone_phoneCreateMany($createManyPhoneDto: CreateManyPhoneDto!) {
@@ -57,14 +57,14 @@ export class Phone {
       const variables = {
         createManyPhoneDto,
       };
-      const response = await this.graphQLClient.request(mutation, variables);
+      const response:PhoneManyResponse = await this.graphQLClient.request(mutation, variables);
       return response;
     } catch (error: any) {
       throw new Error(error);
     }
   }
 
-  async list(findManyAddressDto?: FindManyPhonesDto): Promise<GetAllPhoneData> {
+  async list(findManyAddressDto?: FindManyPhonesDto): Promise<PhoneListResponse> {
     try {
       const query = gql`
         query getAllPhone($findManyAddressDto: FindManyPhoneDto!) {
@@ -98,14 +98,14 @@ export class Phone {
         findManyAddressDto: findManyAddressDto,
       };
 
-      const response = await this.graphQLClient.request(query, variables);
+      const response:PhoneListResponse = await this.graphQLClient.request(query, variables);
       return response;
     } catch (error: any) {
       throw new Error(error);
     }
   }
 
-  async get(id: string): Promise<GetPhone> {
+  async get(id: string): Promise<SinglePhoneResponse> {
     try {
       const query = gql`query Phone_phoneShow($phonePhoneShowId: String!) {
         phone_phoneShow(id: {"phonePhoneShowId": "${id}"}) {
@@ -122,14 +122,14 @@ export class Phone {
           deleted
         }
       }`;
-      const response = await this.graphQLClient.request(query);
+      const response:SinglePhoneResponse = await this.graphQLClient.request(query);
       return response;
     } catch (error: any) {
       throw new Error(error);
     }
   }
 
-  async verify(verifyPhoneDto: VerifyPhoneDto): Promise<any> {
+  async verify(verifyPhoneDto: VerifyPhoneDto): Promise<PhoneVerifyResponse> {
     try {
       const mutation = gql`mutation Phone_phoneVerify($verifyPhoneDto: VerifyPhoneDto!) {
         phone_phoneVerify(verifyPhoneDto: $verifyPhoneDto)
@@ -138,14 +138,14 @@ export class Phone {
       const variables = {
         verifyPhoneDto
       }
-      const response = await this.graphQLClient.request(mutation, variables);
+      const response:PhoneVerifyResponse = await this.graphQLClient.request(mutation, variables);
       return response;
     } catch (error: any) {
       throw new Error(error);
     }
   }
 
-  async delete(deletePhoneDto: DeletePhoneDto): Promise<any> {
+  async delete(deletePhoneDto: DeletePhoneDto): Promise<PhoneDeleteResponse> {
     try {
       const mutation = gql`mutation Phone_phoneDelete($deletePhoneDto: DeletePhoneDto!) {
         phone_phoneDelete(deletePhoneDto: $deletePhoneDto)
@@ -153,7 +153,7 @@ export class Phone {
       const variables = {
         deletePhoneDto
       }
-      const response = await this.graphQLClient.request(mutation, variables);
+      const response:PhoneDeleteResponse = await this.graphQLClient.request(mutation, variables);
       return response;
     } catch (error: any) {
       throw new Error(error);

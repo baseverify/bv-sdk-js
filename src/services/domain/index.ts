@@ -6,7 +6,7 @@ import {
   DeleteDomainDto,
   FindManyDomainDto,
 } from '../../interfaces';
-import { DomainCreateMany, DomainType } from '../../interfaces/response.interface';
+import { DomainCreateMany, DomainCreateManyResponse, DomainCreateResponse, DomainDeleteResponse, DomainListResponse, DomainType, ShowSingleDomain } from '../../interfaces/response.interface';
 
 export class Domain {
   constructor(
@@ -14,7 +14,7 @@ export class Domain {
     private graphQLClient: GraphQLClient
   ) {}
 
-  async create(createDomainDto: CreateDomainDto): Promise<String> {
+  async create(createDomainDto: CreateDomainDto): Promise<DomainCreateResponse> {
     try {
       const mutation = gql`
         mutation Domain_domainCreate($createDomainDto: CreateDomainDto!) {
@@ -26,14 +26,14 @@ export class Domain {
       const variables = {
         createDomainDto,
       };
-      const response = await this.graphQLClient.request(mutation, variables);
+      const response: DomainCreateResponse = await this.graphQLClient.request(mutation, variables);
       return response;
     } catch (error) {
       throw new Error(`${error}`);
     }
   }
 
-  async createMany(createManyDomains: CreateManyDomainDto): Promise<DomainCreateMany[]> {
+  async createMany(createManyDomains: CreateManyDomainDto): Promise<DomainCreateManyResponse> {
     try {
       const mutation = gql`
         mutation Domain_domainCreateMany($createManyDomainDto: CreateManyDomainDto!) {
@@ -45,14 +45,14 @@ export class Domain {
       const variables = {
         createManyDomains,
       };
-      const response = await this.graphQLClient.request(mutation, variables);
+      const response: DomainCreateManyResponse = await this.graphQLClient.request(mutation, variables);
       return response;
     } catch (error) {
       throw new Error(`${error}`);
     }
   }
 
-  async list(findManyDomainDto: FindManyDomainDto): Promise<DomainType[]> {
+  async list(findManyDomainDto: FindManyDomainDto): Promise<DomainListResponse> {
     try {
       const query = gql`
         query Domain_domainList(
@@ -89,14 +89,14 @@ export class Domain {
       const variables = {
         findManyDomainDto,
       };
-      const response = await this.graphQLClient.request(query, variables);
+      const response: DomainListResponse = await this.graphQLClient.request(query, variables);
       return response;
     } catch (error) {
       throw new Error(`${error}`);
     }
   }
 
-  async get(id: string): Promise<DomainType> {
+  async get(id: string): Promise<ShowSingleDomain> {
     try {
       const query = gql`query Domain_domainShow($domainDomainShowId: String!) {
         domain_domainShow(id: {"$domainDomainShowId: ${id}"}) {
@@ -112,14 +112,15 @@ export class Domain {
           deleted
         }
       }`;
-      const response = await this.graphQLClient.request(query);
+      const response:ShowSingleDomain = await this.graphQLClient.request(query);
+      
       return response;
     } catch (error) {
       throw new Error(`${error}`);
     }
   }
 
-  async delete(deleteDomainDto: DeleteDomainDto): Promise<String> {
+  async delete(deleteDomainDto: DeleteDomainDto): Promise<DomainDeleteResponse> {
     try {
       const mutation = gql`
         mutation Domain_domainDelete($deleteDomainDto: DeleteDomainDto!) {
@@ -129,7 +130,7 @@ export class Domain {
       const variables = {
         deleteDomainDto,
       };
-      const response = await this.graphQLClient.request(mutation, variables);
+      const response:DomainDeleteResponse = await this.graphQLClient.request(mutation, variables);
       return response;
     } catch (error) {
       throw new Error(`${error}`);

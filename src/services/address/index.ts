@@ -1,11 +1,11 @@
 import { gql, GraphQLClient } from 'graphql-request';
 import { CreateAddressDto, FindManyAddressDto,  RemoveAddressDto  } from '../../interfaces/create.interface';
-import { AddressData, AddressType, GetManyAddressDataObject } from '../../interfaces/response.interface';
+import { AddresscreateResponse, AddressData, AddressDeleteResponse, AddressType, GetManyAddressDataObject } from '../../interfaces/response.interface';
 
 export class Address {
   constructor(private graphQLClient: GraphQLClient) { }
 
-  async create(createAddressDto: CreateAddressDto): Promise<AddressData> {
+  async create(createAddressDto: CreateAddressDto): Promise<AddresscreateResponse> {
     try {
       const mutation = gql`mutation Address_addressCreate($createAddressDto: CreateAddressDto!) {
         address_addressCreate(createAddressDto: $createAddressDto) {
@@ -32,7 +32,7 @@ export class Address {
       const variables = {
         createAddressDto
       }
-      const response = await this.graphQLClient.request(mutation, variables);
+      const response:AddresscreateResponse = await this.graphQLClient.request(mutation, variables);
       return response;
     } catch (error) {
       throw new Error(`${error}`);
@@ -138,9 +138,8 @@ export class Address {
     }
   }
 
-  async delete(removeAddressDto: RemoveAddressDto): Promise<AddressType> {
+  async delete(removeAddressDto: RemoveAddressDto): Promise<AddressDeleteResponse> {
     try {
-<<<<<<< HEAD
       const mutation = gql`mutation Address_addressDelete($removeAddressDto: RemoveAddressDto!) {
         address_addressDelete(removeAddressDto: $removeAddressDto)
       }`
@@ -148,12 +147,8 @@ export class Address {
       const variables = {
         removeAddressDto
       }
-      const response = await this.graphQLClient.request(mutation, variables);
+      const response:AddressDeleteResponse = await this.graphQLClient.request(mutation, variables);
       return response;
-=======
-      const response = await this.axiosClient.patch('/address', verifyAddress);
-      return response.data;
->>>>>>> 4d0591521b550fd38f1bcd57367ff923d992d3d2
     } catch (error) {
       throw new Error(String(error));
     }
