@@ -1,4 +1,5 @@
 import { GraphQLClient, gql } from 'graphql-request';
+import { BaseVerifyGqlClient } from '../../graphql-client/gql-client';
 
 import {
   CreateDomainDto,
@@ -6,12 +7,11 @@ import {
   DeleteDomainDto,
   FindManyDomainDto,
 } from '../../interfaces';
-import { DomainCreateMany, DomainCreateManyResponse, DomainCreateResponse, DomainDeleteResponse, DomainListResponse, DomainType, ShowSingleDomain } from '../../interfaces/response.interface';
+import { DomainCreateManyResponse, DomainCreateResponse, DomainDeleteResponse, DomainListResponse, ShowSingleDomain } from '../../interfaces/response.interface';
 
 export class Domain {
   constructor(
-    // private axiosClient: AxiosClient
-    private graphQLClient: GraphQLClient
+    private graphQLClient: BaseVerifyGqlClient
   ) {}
 
   async create(createDomainDto: CreateDomainDto): Promise<DomainCreateResponse> {
