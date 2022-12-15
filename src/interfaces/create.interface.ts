@@ -3,21 +3,21 @@ export enum VERIFCATION_TYPE {
   TOKEN = 'TOKEN',
 }
 
-export enum STATUS {
-  VERIFIED = 'VERIFIED',
-  UNVERIFIED = 'UNVERIFIED',
-  INVALID = 'INVALID',
-}
-
-export enum RECORD_STATUS {
+export enum REQUEST_STATUS {
   PENDING = 'PENDING',
   VERIFIED = 'VERIFIED',
   INVALID = 'INVALID',
 }
 
-export interface Pagination {
-  page: number;
-  limit: number;
+export enum RECORD_STATUS {
+  PENDING = 'PENDING',
+  READY = 'READY',
+  PRINTING = 'PRINTING',
+  PROCESSED_FOR_DELIVERY = 'PROCESSED_FOR_DELIVERY',
+  COMPLETED = 'COMPLETED',
+  VERIFIED = 'VERIFIED',
+  INVALID = 'INVALID',
+  CANCELLED = 'CANCELLED',
 }
 
 export enum ADDRESS_VERIFICATION_TYPE {
@@ -26,64 +26,92 @@ export enum ADDRESS_VERIFICATION_TYPE {
 };
 
 export interface Filter {
-  status: RECORD_STATUS;
+  status: REQUEST_STATUS;
 }
 
-export interface CreatePhone {
+export interface Pagination {
+  limit: number;
+  page: number;
+}
+
+export interface FindManyPhonesDto {
+  filter?: Filter;
+  pagination?: Pagination;
+}
+
+export interface CreatePhoneDto {
   number: string;
-  verificationType: VERIFCATION_TYPE;
   redirectUri?: string;
+  verificationType: VERIFCATION_TYPE;
 }
 
-export interface CreateManyPhones {
-  phone: CreatePhone[];
+export interface CreateManyPhoneDto {
+  phone: CreatePhoneDto[];
 }
 
-export interface VerifyPhone {
+export interface VerifyPhoneDto {
   number: string;
   otp: string;
 }
 
-export interface CreateAddress {
-  customerName: string;
-  customerEmail: string;
+export interface DeletePhoneDto {
+  id: string;
+}
+
+export interface CreateAddressDto {
   address: string;
   address2: string;
   city: string;
-  state: string;
   country: string;
-  type: ADDRESS_VERIFICATION_TYPE,
+  customerName: string;
+  redirectUri?: string;
+  state: string;
   zipCode: string;
 }
-
-export interface VerifyAddress {
-  identifier: string;
-  otp: string;
+export interface AddressFilter {
+  status: RECORD_STATUS;
 }
 
-export interface CreateDomain {
+export interface FindManyAddressDto {
+  filter?: AddressFilter;
+  pagination?: Pagination;
+}
+export interface RemoveAddressDto {
+  id: string;
+}
+
+export interface CreateEmailDto {
+  email: string;
+  redirectUri?: string;
+}
+
+export interface CreateManyEmailDto {
+  email: CreateEmailDto[];
+}
+
+export interface FindManyEmailDto {
+  filter?: Filter;
+  pagination?: Pagination;
+}
+
+export interface DeleteEmailDto {
+  email: string;
+}
+
+export interface CreateDomainDto {
   domain: string;
-  email: string;
+  email?: string;
 }
 
-export interface createManyDomain {
-  domain: CreateDomain[];
+export interface CreateManyDomainDto {
+  domain: CreateDomainDto[];
 }
 
-export interface CreateEmail {
-  email: string;
-  redirectUri: string;
-}
+  export interface FindManyDomainDto {
+      filter: Filter;
+      pagination: Pagination;
+  }
 
-export interface CreateManyEmails {
-  email: CreateEmail[];
-}
-
-export interface DeleteEmail {
-  email: string;
-}
-
-export interface VerifyEmail {
-  hash: string;
-  email: string;
+  export interface DeleteDomainDto {
+    id: string;
 }

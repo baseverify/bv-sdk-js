@@ -1,71 +1,159 @@
-import { AxiosClient } from '../../axios/axios.service';
+import { gql } from 'graphql-request';
+
+import { BaseVerifyGqlClient } from '../../graphql-client/gql-client';
 import {
-  CreateEmail,
-  CreateManyEmails,
-  CreateManyPhones,
-  Filter,
-  Pagination,
-  VerifyEmail,
-  VerifyPhone,
-} from '../../interfaces/create.interface';
-import { CreateManyEmailsData } from '../../interfaces/response.interface';
+  CreateEmailDto,
+  CreateManyEmailDto,
+  DeleteEmailDto,
+  FindManyEmailDto,
+} from '../../interfaces';
+import {
+  CreateManyDataResponse,
+  EmailCreateResponse,
+  EmailDeleteResponse,
+  EmailListResonse,
+  SingleEmailResponse,
+} from '../../interfaces/response.interface';
 
 export class Email {
-  constructor(private axiosClient: AxiosClient) { }
+  constructor(private graphQLClient: BaseVerifyGqlClient) {}
 
-  async create(createEmail: CreateEmail): Promise<any> {
+  async create(createEmailDto: CreateEmailDto): Promise<EmailCreateResponse> {
     try {
-      const response = await this.axiosClient.post('/email', createEmail);
-      return response.data;
+      const mutation = gql`
+        mutation Email_emailCreate($createEmailDto: CreateEmailDto!) {
+          email_emailCreate(createEmailDto: $createEmailDto) {
+            id
+            requesterId
+            identifier
+            email
+            tier
+            status
+            verifiedAt
+            createdAt
+            updatedAt
+            deleted
+          }
+        }
+      `;
+
+      const variables = {
+        createEmailDto,
+      };
+      const response: EmailCreateResponse = await this.graphQLClient.request(mutation, variables);
+      return response;
     } catch (error) {
       throw new Error(`${error}`);
     }
   }
 
-  async createMany(createManyEmails: CreateManyEmails): Promise<CreateManyEmailsData> {
+  async createMany(createManyEmailDto: CreateManyEmailDto): Promise<CreateManyDataResponse> {
     try {
-      const response = await this.axiosClient.post('/email/create-many', createManyEmails);
-      return response.data;
+      const mutation = gql`
+        mutation Email_emailCreateMany($createManyEmailDto: CreateManyEmailDto!) {
+          email_emailCreateMany(createManyEmailDto: $createManyEmailDto) {
+            id
+            requesterId
+            identifier
+            email
+            tier
+            status
+            verifiedAt
+            createdAt
+            updatedAt
+            deleted
+          }
+        }
+      `;
+
+      const variables = {
+        createManyEmails: createManyEmailDto,
+      };
+      const response: CreateManyDataResponse = await this.graphQLClient.request(
+        mutation,
+        variables
+      );
+      return response;
     } catch (error) {
       throw new Error(`${error}`);
     }
   }
 
-  async list(
-    pagination?: Pagination,
-    filter?: Filter,
-  ): Promise<Email[]> {
+  async list(findManyEmailDto: FindManyEmailDto): Promise<EmailListResonse> {
     try {
-      const response = await this.axiosClient.get('/email', { params: { ...pagination, ...filter } });
-      return response.data;
+      const query = gql`
+        query Email_emailList($findManyEmailDto: FindManyEmailDto!) {
+          email_emailList(findManyEmailDto: $findManyEmailDto) {
+            data {
+              id
+              requesterId
+              identifier
+              email
+              tier
+              status
+              verifiedAt
+              createdAt
+              updatedAt
+              deleted
+            }
+            metadata {
+              page
+              limit
+              total {
+                pages
+                records
+              }
+            }
+          }
+        }
+      `;
+
+      const variables = {
+        findManyEmailDto,
+      };
+      const response: EmailListResonse = await this.graphQLClient.request(query, variables);
+      return response;
     } catch (error) {
       throw new Error(`${error}`);
     }
   }
 
-  async get(id: string): Promise<Email> {
+  async get(id: string): Promise<SingleEmailResponse> {
     try {
-      const response = await this.axiosClient.get(`/email/${id}`);
-      return response.data;
+      const query = gql`query Email_emailShow($emailEmailShowId: String!) {
+        email_emailShow(id: {"emailEmailShowId: ${id}"}) {
+          id
+          requesterId
+          identifier
+          email
+          tier
+          status
+          verifiedAt
+          createdAt
+          updatedAt
+          deleted
+        }
+      }`;
+
+      const response: SingleEmailResponse = await this.graphQLClient.request(query);
+      return response;
     } catch (error) {
       throw new Error(`${error}`);
     }
   }
 
-  async verify(verifyEmail: VerifyEmail): Promise<any> {
+  async delete(deleteEmailDto: DeleteEmailDto): Promise<EmailDeleteResponse> {
     try {
-      const response = await this.axiosClient.patch('/email/verify', verifyEmail);
-      return response.data;
-    } catch (error) {
-      throw new Error(`${error}`);
-    }
-  }
-
-  //TODO: define Delete Interface
-  async delete(id: string): Promise<string> {
-    try {
-      const response = await this.axiosClient.delete(`/email/${id}`);
-      return response.data;
+      const mutation = gql`
+        mutation Email_emailDelete($deleteEmailDto: DeleteEmailDto!) {
+          email_emailDelete(deleteEmailDto: $deleteEmailDto)
+        }
+      `;
+      const variables = {
+        deleteEmailDto,
+      };
+      const response: EmailDeleteResponse = await this.graphQLClient.request(mutation, variables);
+      return response;
     } catch (error) {
       throw new Error(`${error}`);
     }
