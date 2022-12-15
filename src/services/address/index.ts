@@ -1,9 +1,10 @@
-import { gql, GraphQLClient } from 'graphql-request';
+import { gql } from 'graphql-request';
+import { BaseVerifyGqlClient } from '../../graphql-client/gql-client';
 import { CreateAddressDto, FindManyAddressDto,  RemoveAddressDto  } from '../../interfaces/create.interface';
-import { AddresscreateResponse, AddressData, AddressDeleteResponse, AddressType, AdressListResponse, GetManyAddressDataObject, SingleAddressResponse } from '../../interfaces/response.interface';
+import { AddresscreateResponse, AddressDeleteResponse,  AdressListResponse, SingleAddressResponse } from '../../interfaces/response.interface';
 
 export class Address {
-  constructor(private graphQLClient: GraphQLClient) { }
+  constructor(private graphQLClient: BaseVerifyGqlClient) { }
 
   async create(createAddressDto: CreateAddressDto): Promise<AddresscreateResponse> {
     try {

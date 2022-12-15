@@ -1,4 +1,4 @@
-import { GraphQLClient, gql } from 'graphql-request';
+import { gql } from 'graphql-request';
 
 import { BaseVerifyGqlClient } from '../../graphql-client/gql-client';
 import {

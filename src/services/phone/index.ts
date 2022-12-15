@@ -1,11 +1,8 @@
-import { GraphQLClient, gql } from 'graphql-request';
-
+import {  gql } from 'graphql-request';
+import { BaseVerifyGqlClient } from '../../graphql-client/gql-client';
 import { CreateManyPhoneDto, CreatePhoneDto, DeletePhoneDto, FindManyPhonesDto, NumberCreateResponse, PhoneDeleteResponse, PhoneListResponse, PhoneManyResponse, PhoneVerifyResponse, SinglePhoneResponse, VerifyPhoneDto } from '../../interfaces';
-// import { CreateManyPhones, CreatePhone, Filter, Pagination, VerifyPhone } from '../../interfaces/create.interface';
-// import { GetAllPhoneData, GetPhone } from '../../interfaces/response.interface';
-
 export class Phone {
-  constructor(private graphQLClient: GraphQLClient) {}
+  constructor(private graphQLClient: BaseVerifyGqlClient) {}
   async create(createPhoneDto: CreatePhoneDto): Promise<NumberCreateResponse> {
     try {
       const mutation = gql`

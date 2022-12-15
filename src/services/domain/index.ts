@@ -1,4 +1,4 @@
-import { GraphQLClient, gql } from 'graphql-request';
+import { gql } from 'graphql-request';
 import { BaseVerifyGqlClient } from '../../graphql-client/gql-client';
 
 import {
@@ -7,7 +7,7 @@ import {
   DeleteDomainDto,
   FindManyDomainDto,
 } from '../../interfaces';
-import { DomainCreateManyResponse, DomainCreateResponse, DomainDeleteResponse, DomainListResponse, ShowSingleDomain } from '../../interfaces/response.interface';
+import { DomainCreateManyResponse, DomainCreateResponse, DomainDeleteResponse, DomainListResponse, SingleDomainResponse } from '../../interfaces/response.interface';
 
 export class Domain {
   constructor(
@@ -96,7 +96,7 @@ export class Domain {
     }
   }
 
-  async get(id: string): Promise<ShowSingleDomain> {
+  async get(id: string): Promise<SingleDomainResponse> {
     try {
       const query = gql`query Domain_domainShow($domainDomainShowId: String!) {
         domain_domainShow(id: {"$domainDomainShowId: ${id}"}) {
@@ -112,7 +112,7 @@ export class Domain {
           deleted
         }
       }`;
-      const response:ShowSingleDomain = await this.graphQLClient.request(query);
+      const response: SingleDomainResponse = await this.graphQLClient.request(query);
       
       return response;
     } catch (error) {
