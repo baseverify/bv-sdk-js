@@ -5,7 +5,7 @@ import { Email } from './services/email';
 import { Phone } from './services/phone';
 
 export class BaseVerify {
-  private graphQLClient: BaseVerifyGqlClient;
+  graphQLClient: BaseVerifyGqlClient;
   phone: Phone;
   address: Address;
   domain: Domain;
