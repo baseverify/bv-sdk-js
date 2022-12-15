@@ -364,14 +364,14 @@ export interface DomainListResponse {
   data: PaginatedDomainData;
 }
 
-// domain show
+// Single Domain
 
-export interface ShowSingleDomainData {
+export interface SingleDomainData {
   domain: Domain;
 }
 
-export interface ShowSingleDomain {
-  data: ShowSingleDomainData;
+export interface SingleDomainResponse {
+  data: SingleDomainData;
 }
 
 // Domain delete
@@ -406,22 +406,19 @@ export interface CreateManyDataResponse {
 
 // Email List
 
-export interface EmailListData {
-  email_emailList: EmailList;
-}
 
 export interface EmailListResonse {
-  data: EmailListData;
+  data: EmailList;
 }
 
-// Email Get
+// Single Email
 
-export interface EmailShow {
+export interface SingleEmailData {
   email_emailShow: Email;
 }
 
 export interface SingleEmailResponse {
-  data: EmailShow;
+  data: SingleEmailData;
 }
 
 // Email Delete
@@ -469,7 +466,7 @@ export interface PhoneListResponse {
   data: PhoneListData;
 }
 
-// Get One Phone
+// Single Phone
 
 export interface SinglePhoneData {
   phone_phoneShow: Phone;
@@ -538,3 +535,36 @@ export interface AddressDeleteData {
 export interface AddressDeleteResponse {
   data: AddressDeleteData;
 }
+
+
+// Adress List 
+
+
+   
+    export interface AddressList {
+        data: Address[];
+        metadata: Metadata;
+    }
+
+    export interface AdressListData {
+        address_addressList: AddressList;
+    }
+
+    export interface AdressListResponse {
+        data: AdressListData;
+    }
+
+
+
+// Single Address 
+
+
+   
+    export interface SingleAddressData {
+        address_addressShow: Address;
+    }
+
+    export interface SingleAddressResponse {
+        data: SingleAddressData;
+    }
+

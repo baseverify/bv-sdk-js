@@ -1,6 +1,6 @@
 import { gql, GraphQLClient } from 'graphql-request';
 import { CreateAddressDto, FindManyAddressDto,  RemoveAddressDto  } from '../../interfaces/create.interface';
-import { AddresscreateResponse, AddressData, AddressDeleteResponse, AddressType, GetManyAddressDataObject } from '../../interfaces/response.interface';
+import { AddresscreateResponse, AddressData, AddressDeleteResponse, AddressType, AdressListResponse, GetManyAddressDataObject, SingleAddressResponse } from '../../interfaces/response.interface';
 
 export class Address {
   constructor(private graphQLClient: GraphQLClient) { }
@@ -47,7 +47,7 @@ export class Address {
   //   }
   // }
 
-  async list(findManyAddressDto:FindManyAddressDto): Promise<GetManyAddressDataObject> {
+  async list(findManyAddressDto:FindManyAddressDto): Promise<AdressListResponse> {
     try {
       const query = gql`query Address_addressList($findManyAddressDto: FindManyAddressDto!) {
         address_addressList(findManyAddressDto: $findManyAddressDto) {
@@ -83,7 +83,7 @@ export class Address {
       const variables = {
         findManyAddressDto,
       } 
-      const response = await this.graphQLClient.request(query, variables);
+      const response:AdressListResponse = await this.graphQLClient.request(query, variables);
       return response;
     } catch (error) {
       throw new Error(`${error}`);
@@ -108,7 +108,7 @@ export class Address {
   //   }
   // }
 
-  async get(id: string): Promise<AddressType> {
+  async get(id: string): Promise<SingleAddressResponse> {
     try {
       const  query = gql`query Address_addressShow($addressAddressShowId: String!) {
         address_addressShow(id: {"addressAddressShowId": "${id}"}) {
@@ -131,7 +131,7 @@ export class Address {
           deleted
         }
       }`
-      const response = await this.graphQLClient.request(query);
+      const response:SingleAddressResponse = await this.graphQLClient.request(query);
       return response;
     } catch (error) {
       throw new Error(`${error}`);
