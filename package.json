@@ -60,9 +60,7 @@
     "webpack-node-externals": "^3.0.0"
   },
   "peerDependencies": {
-    "axios": "^0.27.2"
-  },
-  "dependencies": {
+    "axios": "^0.27.2",
     "graphql-request": "^5.0.0"
   }
 }
