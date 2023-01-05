@@ -80,6 +80,10 @@ export interface RemoveAddressDto {
   id: string;
 }
 
+export interface VerifyAddressOtpInput {
+  otp: string;
+}
+
 export interface CreateEmailDto {
   email: string;
   redirectUri?: string;

@@ -1,7 +1,7 @@
 import { gql } from 'graphql-request';
 import { BaseVerifyGqlClient } from '../../graphql-client/gql-client';
-import { CreateAddressDto, FindManyAddressDto,  RemoveAddressDto  } from '../../interfaces/create.interface';
-import { AddresscreateResponse, AddressDeleteResponse,  AdressListResponse, SingleAddressResponse } from '../../interfaces/response.interface';
+import { CreateAddressDto, FindManyAddressDto,  RemoveAddressDto, VerifyAddressOtpInput  } from '../../interfaces/create.interface';
+import { AddresscreateResponse, AddressDeleteResponse,  AddressVerify,  AdressListResponse, SingleAddressResponse } from '../../interfaces/response.interface';
 
 export class Address {
   constructor(private graphQLClient: BaseVerifyGqlClient) { }
@@ -39,14 +39,6 @@ export class Address {
       throw new Error(`${error}`);
     }
   }
-  // async create(createAddress: CreateAddress): Promise<AddressData> {
-  //   try {
-  //     const response = await this.graphQLClient.post('/address', createAddress);
-  //     return response.data;
-  //   } catch (error) {
-  //     throw new Error(`${error}`);
-  //   }
-  // }
 
   async list(findManyAddressDto:FindManyAddressDto): Promise<AdressListResponse> {
     try {
@@ -90,24 +82,6 @@ export class Address {
       throw new Error(`${error}`);
     }
   }
-
-  // async list(findManyAddressDto:FindManyAddressDto): Promise<GetManyAddressDataObject> {
-  //   try {
-  //     const response = await this.graphQLClient.get('/address', { params: { ...pagination, ...filter } });
-  //     return response.data;
-  //   } catch (error) {
-  //     throw new Error(`${error}`);
-  //   }
-  // }
-
-  // async get(id: string): Promise<AddressType> {
-  //   try {
-  //     const response = await this.graphQLClient.get(`/address/${id}`);
-  //     return response.data;
-  //   } catch (error) {
-  //     throw new Error(`${error}`);
-  //   }
-  // }
 
   async get(id: string): Promise<SingleAddressResponse> {
     try {
@@ -156,12 +130,20 @@ export class Address {
   }
 
 
-  // async verify(verifyAddress: VerifyAddress): Promise<AddressType> {
-  //   try {
-  //     const response = await this.graphQLClient.patch('/address', verifyAddress);
-  //     return response.data;
-  //   } catch (error) {
-  //     throw new Error(String(error));
-  //   }
-  // }
+  async verify(verifyAddressOtpInput: VerifyAddressOtpInput): Promise<AddressVerify> {
+    try {
+      const mutation = gql`mutation Address_addressVerify($verifyAddressOtpInput: VerifyAddressOtpInput!) {
+        address_addressVerify(verifyAddressOtpInput: $verifyAddressOtpInput) {
+          message
+        }
+      }`
+      const variables = {
+        verifyAddressOtpInput
+      }
+      const response = await this.graphQLClient.request(mutation, variables);
+      return response;
+    } catch (error) {
+      throw new Error(String(error));
+    }
+  }
 }

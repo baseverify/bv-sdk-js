@@ -275,6 +275,20 @@ export interface AddressDeleteResponse {
   data: AddressDeleteData;
 }
 
+//Address verify
+
+
+  export interface AddressAddressVerify {
+      message: string;
+  }
+
+  export interface AddressAddressVerifyData {
+      address_addressVerify: AddressAddressVerify;
+  }
+
+  export interface AddressVerify {
+      data: AddressAddressVerifyData;
+  }
 
 // Adress List 
 
