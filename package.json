@@ -28,7 +28,7 @@
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/github": "^8.0.5",
-    "@semantic-release/npm": "^9.0.1",
+    "@semantic-release/npm": "^10.0.2",
     "@semantic-release/release-notes-generator": "^10.0.3",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@typescript-eslint/eslint-plugin": "^5.31.0",
